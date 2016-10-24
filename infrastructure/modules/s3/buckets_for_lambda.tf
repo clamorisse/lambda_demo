@@ -3,6 +3,7 @@
 #          for Lambda f(x)
 #-------------------------------------------
 variable "source_bucket"     { }
+variable "app_name"          { }
 variable "env"               { }
 
 
@@ -11,7 +12,7 @@ resource "aws_s3_bucket" "source" {
     acl = "private"
 
     tags {
-        Name = "lambda_s3_triggered"
+        Name = "${var.app_name}"
         Environment = "${var.env}"
     }
 }
@@ -21,11 +22,15 @@ resource "aws_s3_bucket" "target" {
     acl = "private"
 
     tags {
-        Name = "lambda_s3_triggered"
+        Name = "${var.app_name}"
         Environment = "${var.env}"
     }
 }
 
-output "source-bucket" { value = "${aws_s3_bucket.source.id}" }
-output "target-bucket" { value = "${aws_s3_bucket.target.id}" }
+output "source-bucket-id"  { value = "${aws_s3_bucket.source.id}" }
+output "source-bucket-arn" { value = "${aws_s3_bucket.source.arn}" }
+
+output "target-bucket-id"  { value = "${aws_s3_bucket.target.id}" }
+output "target-bucket-arn" { value = "${aws_s3_bucket.target.arn}" }
+
 

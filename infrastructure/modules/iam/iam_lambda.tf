@@ -3,13 +3,13 @@
 #                 LAMBDA f(x)
 # ------------------------------------------------
 
-variable "application-name"             { }
-variable "lambda_role_policy_tmpl"      { }
+variable "app_name"                     { }
+variable "policy_file"                  { }
 
 # CREATING EXECUTION ROLE
 
 resource "aws_iam_role" "exec_role" {
-    name = "${var.application-name}-lambda-exec_role"
+    name = "${var.app_name}-lambda-exec_role"
     assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -35,24 +35,14 @@ resource "aws_iam_role_policy_attachment" "lambda_execute" {
 }
 
 
-# File that contains the policy for Lambda to access S3 resources
-
-resource "template_file" "lambda_policy" {
-    template = "${file("${var.lambda_role_policy_tmpl}")}"
-    vars {
-        input_bucket_name = "${aws_s3_bucket.source.id}"
-        html_bucket_name = "${aws_s3_bucket.target.id}"
-    }
-}
-
 # Inline policy for permissions to access resources
+
 resource "aws_iam_role_policy" "lambda_policy" {
-    name = "${var.application-name}-access-resources-policy"
+    name = "${var.app_name}-access-resources-policy"
     role = "${aws_iam_role.exec_role.id}"
-    policy = "${template_file.lambda_policy.rendered}"
+    policy = "${var.policy_file}"
 }
 
 
+output "execution_role_arn" { value = "${aws_iam_role.exec_role.arn}" }
 
-
-output "exectution_role_arn" { value = "${aws_iam_role.exec_role.arn}" }
