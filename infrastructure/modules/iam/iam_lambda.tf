@@ -35,7 +35,8 @@ resource "aws_iam_role_policy_attachment" "lambda_execute" {
 }
 
 
-# Inline policy for permissions to access resources
+# Inline policy for permissions to access
+# S3 and ElasticSearch resources
 
 resource "aws_iam_role_policy" "lambda_policy" {
     name = "${var.app_name}-access-resources-policy"

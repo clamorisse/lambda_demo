@@ -16,7 +16,7 @@
                 "s3:ListBucket"
             ],
             "Resource": [
-                "arn:aws:s3:::${input_bucket_name}"
+                "arn:aws:s3:::${source_bucket_name}"
             ]
         },
         {
@@ -25,7 +25,7 @@
                 "s3:GetObject"
             ],
             "Resource": [
-                "arn:aws:s3:::${input_bucket_name}/*"
+                "arn:aws:s3:::${source_bucket_name}/*"
             ]
         },
         {
@@ -34,7 +34,7 @@
                 "s3:ListBucket"
             ],
             "Resource": [
-                "arn:aws:s3:::${html_bucket_name}"
+                "arn:aws:s3:::${target_bucket_name}"
             ]
         },
         {
@@ -47,8 +47,15 @@
                 "s3:PutObjectAcl"
             ],
             "Resource": [
-                "arn:aws:s3:::${html_bucket_name}/*"
+                "arn:aws:s3:::${target_bucket_name}/*"
             ]
+        },
+        {
+            "Action": [
+                "es:*"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:es:us-west-2:123456789012:domain/streaming-logs/*"
         }
     ]
 }

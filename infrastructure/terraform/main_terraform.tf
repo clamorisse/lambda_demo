@@ -44,8 +44,8 @@ module "s3_buckets" {
 resource "template_file" "lambda_policy" {
     template = "${file("${var.lambda_role_policy_tmpl}")}"
     vars {
-        input_bucket_name = "${module.s3_buckets.source-bucket-id}"
-        html_bucket_name = "${module.s3_buckets.target-bucket-id}"
+        source_bucket_name = "${module.s3_buckets.source-bucket-id}"
+        target_bucket_name = "${module.s3_buckets.target-bucket-id}"
     }
 }
 
@@ -74,8 +74,8 @@ module "lambda_function" {
   source_id     = "${module.s3_buckets.source-bucket-id}"
 
   events        = "s3:ObjectCreated:*"
-  filter_prefix = "images/"
-  filter_suffix = ".jpg"
+  filter_prefix = "data/"
+  filter_suffix = ".csv"
 }
 
 output "lambda_function_arn" { value = "${module.lambda_function.lambda_function_arn}" }

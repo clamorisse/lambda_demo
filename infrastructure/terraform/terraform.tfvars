@@ -10,4 +10,4 @@ env              = "dev"
 
 source_bucket                = "source_bvc_files"
 lambda_role_policy_tmpl      = "template_files/lambda_policy_s3_resources.tmpl"
-lambda_function_zip_file     = "template_files/lambda_resize_image.zip"
+lambda_function_zip_file     = "../../function/lambda_analyze_csv.zip"
