@@ -10,6 +10,7 @@ variable "env"               { }
 resource "aws_s3_bucket" "source" {
     bucket = "${var.source_bucket}" 
     acl = "private"
+    force_destroy = true
 
     tags {
         Name = "${var.app_name}"
@@ -20,6 +21,7 @@ resource "aws_s3_bucket" "source" {
 resource "aws_s3_bucket" "target" {
     bucket = "${var.source_bucket}analyzed" 
     acl = "private"
+    force_destroy = true
 
     tags {
         Name = "${var.app_name}"
