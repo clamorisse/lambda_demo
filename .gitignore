@@ -4,3 +4,4 @@
 **/*.swp
 **/.terraform
 **/*.txt
+**/data/
