@@ -10,9 +10,18 @@ Lambda function is triggered by uploading files to the S3 bucket: ```source_bvc_
 
 This lambda function will use the defaul VPC. You can change the the name of the source bucket in the file ```terraform.tfvars```, the output bucket will be namede using the source bucket name and add the word "analyzed".
 
-In ```infrastructure/terraform/``` run ```terraform plan``` to check what will be created. 
+In ```infrastructure/terraform/``` run 
 
-Then run ```terraform apply```.
+```
+terraform plan
+``` 
+to check what will be created. 
+
+Then run 
+
+```
+terraform apply
+```
 
 ## To run the function
 
