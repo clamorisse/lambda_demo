@@ -31,4 +31,4 @@ The AWS resources required to have this function are provisioned using terraform
 * Upload files to S3 ```aws s3 cp --recursive ./data/ s3://source_bvc_files/data/```
 * Check again the buckets you will see the analyzed files!!!
 
-Voilá!
+Et Voilá!
