@@ -16,7 +16,8 @@ dependencies:
     - ./terraform --version
 test:
   post:
-    - docker run --rm -v ./insfrastructure/terraform/:/data -t wata727/tflint
+    - cd infrastructure/terraform && ../../terraform get
+    - docker run --rm -v ~/lambda_demo/insfrastructure/terraform/:/data -t wata727/tflint
    
 deployment:
   production:
