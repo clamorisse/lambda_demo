@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/bvcotero/lambda_demo/tree/master.svg?style=shield&vg)](https://circleci.com/gh/bvcotero/lambda_demo/tree/master)
+
 # &#955;(x) triggered by object upload to S3
 ## A simple example to analyze research data in the cloud using AWS
 
