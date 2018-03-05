@@ -18,7 +18,7 @@ test:
   post:
     - cd infrastructure/terraform && ../../terraform get
     - docker run --rm -v ~/lambda_demo/insfrastructure/terraform/:/data -t wata727/tflint
-    - if [ -f CA4PExc1500.csv ]; echo " There is a data file available"
+    - if [ -f CA4PExc1500.csv ]; then echo " There is a data file available" fi
    
 deployment:
   production:
