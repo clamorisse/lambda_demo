@@ -10,7 +10,7 @@ checkout:
 dependencies:
   pre:
     - sudo pip install awscli
-    - wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.3_linux_amd64.zip
+    - wget https://releases.hashicorp.com/terraform/0.11.3/terraform_0.11.3_linux_amd64.zip
     - unzip terraform_0.6.3_linux_amd64.zip
     - docker info
     - terraform --version
