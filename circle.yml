@@ -1,0 +1,27 @@
+machine:
+  timezone:
+    America/New_York
+  services:
+    - docker
+
+checkout:
+  post:
+
+dependencies:
+  pre:
+    - sudo pip install awscli
+    - wget https://releases.hashicorp.com/terraform/0.11.3/terraform_0.11.3_linux_amd64.zip
+    - unzip terraform_0.11.3_linux_amd64.zip
+    - docker info
+    - ./terraform --version
+test:
+  post:
+   
+deployment:
+  production:
+    branch: master
+    commands:
+
+  staging:
+    branch: forestry 
+    commands:
