@@ -18,6 +18,7 @@ test:
   post:
     - cd infrastructure/terraform && ../../terraform get
     - docker run --rm -v ~/lambda_demo/insfrastructure/terraform/:/data -t wata727/tflint
+    - if [ -e *.csv ]; then echo true; fi
    
 deployment:
   production:
