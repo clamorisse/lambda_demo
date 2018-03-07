@@ -6,4 +6,4 @@
 **/*.txt
 **/data/
 **/rubies/
-**/build*.env
+**/*.env
