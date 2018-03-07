@@ -15,7 +15,7 @@ dependencies:
     - docker info
     - ./terraform --version
     - cd infrastructure && pwd && bundler install
-    - cd infrastructure/remote_tfstate && export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default) && export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default) && terraform remote config -backend=s3 -backend-config=bucket=tfstate_lambda_clarivate -backend-config=key=lambda_s3_triggered/dev/terraform.tfstate -backend-config=region=us-east-1 -backend-config=access_key=$AWS_ACCESS_KEY_ID -backend-config=secret_key=AWS_SECRET_ACCESS_KEY
+    - cd infrastructure/terraform && export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default) && export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default) && terraform remote config -backend=s3 -backend-config=bucket=tfstate_lambda_clarivate -backend-config=key=lambda_s3_triggered/dev/terraform.tfstate -backend-config=region=us-east-1 -backend-config=access_key=$AWS_ACCESS_KEY_ID -backend-config=secret_key=AWS_SECRET_ACCESS_KEY
 
 test:
   post:
