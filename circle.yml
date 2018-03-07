@@ -14,16 +14,16 @@ dependencies:
     - unzip terraform_0.11.3_linux_amd64.zip
     - docker info
     - ./terraform --version
-    - echo "AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default)" >> infrastructure/build-circleci.env
-    - echo "AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default)" >> infrastructure/build-circleci.env
-    - cd infrastructure && pwd && docker run -it --net host -e BUNDLE_PATH=/usr/src/app/rubies -e BUNDLE_BIN=/usr/src/app/rubies -e BUNDLE_APP_CONFIG=/usr/src/app/rubies -e PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/src/app:/usr/src/app/rubies -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD":/usr/src/app -w /usr/src/app ruby:2.1 bundle install
+    - export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default)
+    - export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default)
+    - cd infrastructure && pwd && bundler install
 
 test:
   post:
     - cd infrastructure/terraform && ../../terraform get
     - docker run --rm -v ~/lambda_demo/insfrastructure/terraform/:/data -t wata727/tflint
     - if [ -e *.csv ]; then echo true; fi
-    - cd infrastructure && pwd && docker run -it --net host --name ruby --env-file $PWD/bundle_env_var.env --env-file &PWD/build-circleci.env -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD":/usr/src/app -w /usr/src/app ruby:2.1 rspec
+    - cd infrastructure && pwd && rspec
    
 deployment:
   production:
