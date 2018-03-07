@@ -15,7 +15,8 @@ dependencies:
     - docker info
     - ./terraform --version
     - cd infrastructure && pwd
-    - ./create_credentials.sh default default
+    - echo "AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default)" >> build-bvc.env
+    - echo "AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default)" >> build-bvc.env
 
 test:
   post:
