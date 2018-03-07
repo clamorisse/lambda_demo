@@ -15,7 +15,7 @@ dependencies:
     - docker info
     - ./terraform --version
     - cd infrastructure
-    - ./update_creds.sh default default
+    - ./create_credentials.sh default default
 
 test:
   post:
