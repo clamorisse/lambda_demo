@@ -5,3 +5,5 @@
 **/.terraform
 **/*.txt
 **/data/
+**/rubies/
+**/*.env
