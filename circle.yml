@@ -21,9 +21,7 @@ test:
     - cd infrastructure/terraform && ../../terraform get
     - docker run --rm -v ~/lambda_demo/insfrastructure/terraform/:/data -t wata727/tflint
     - if [ -e *.csv ]; then echo true; fi
-    - export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default)
-    - export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default)
-    - cd infrastructure && pwd && rspec
+    - cd infrastructure && export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default) && export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default) && rspec
    
 deployment:
   production:
