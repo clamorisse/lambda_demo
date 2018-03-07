@@ -14,8 +14,6 @@ dependencies:
     - unzip terraform_0.11.3_linux_amd64.zip
     - docker info
     - ./terraform --version
-    - export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default)
-    - export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default)
     - cd infrastructure && pwd && bundler install
 
 test:
@@ -23,6 +21,8 @@ test:
     - cd infrastructure/terraform && ../../terraform get
     - docker run --rm -v ~/lambda_demo/insfrastructure/terraform/:/data -t wata727/tflint
     - if [ -e *.csv ]; then echo true; fi
+    - export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default)
+    - export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default)
     - cd infrastructure && pwd && rspec
    
 deployment:
