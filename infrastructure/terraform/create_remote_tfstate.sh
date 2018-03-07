@@ -1,5 +1,4 @@
-#!bin/bash
-# BASH version 4.3.46(1)-release
+# !bin/bash
 
 # Script to set up terraform remote state 
 
