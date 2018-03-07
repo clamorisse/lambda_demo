@@ -14,6 +14,9 @@ dependencies:
     - unzip terraform_0.11.3_linux_amd64.zip
     - docker info
     - ./terraform --version
+    - cd infrastructure
+    - ./update_creds.sh default default
+
 test:
   post:
     - cd infrastructure/terraform && ../../terraform get
