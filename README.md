@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/bvcotero/lambda_demo/tree/master.svg?style=shield&vg)](https://circleci.com/gh/bvcotero/lambda_demo/tree/master)
+
 # &#955;(x) triggered by object upload to S3
 ## A simple example to analyze research data in the cloud using AWS
 
@@ -22,13 +24,62 @@ The AWS resources required to have this function are provisioned using terraform
 
 ### How to use it?
 
+* Terraform v. 0.11.3
 * Clone this repository
-* ```cd infrastructure/terraform/```
-* Check what resources will be created ```terraform plan```
-* Provision resources ```terraform apply```
-*Login to AWS console and check the s3 buckets, lambda function and its logs.
+* ```cd ./infrastructure/terraform/```
+* ```terraform init```
+* Check what resources will be created ```terraform plan -out .terraform/.terraform.plan```
+* Provision resources ```terraform apply .terraform/.terrafrom.plan```
+* Login to AWS console and check the s3 buckets, lambda function and its logs.
 * ```cd ../function/```
 * Upload files to S3 ```aws s3 cp --recursive ./data/ s3://source_bvc_files/data/```
 * Check again the buckets you will see the analyzed files!!!
+
+## How to test it?
+
+* ```cd ./infrastructure/terrafrom```
+* Run ```terraform init```
+* Run Terraform linter:
+```
+docker run --rm -v "$PWD":/data -t wata727/tflint
+```
+* Run ```terraform plan -out .terraform/.terraform.plan``` and ```terraform apply .terraform/.terrafrom.plan```
+* ```cd ../```
+
+* Install Gems
+
+```
+docker run --rm -it \
+       --net host  \
+       --name ruby \
+       --env-file bundle_env_var.env \
+       -v /var/run/docker.sock:/var/run/docker.sock \
+       -v "$PWD":/usr/src/app \
+       -w /usr/src/app ruby:2.1  \
+       bundler install
+ ```
+
+ * Create a file with aws credentials to be run from local computer
+
+ ```
+ ./update_credentials.sh <your-environment> <your-profile-name>
+ ```
+ * Run Rspec
+ ```
+ docker run --rm -it \
+       --net host  \
+       --name ruby \
+       --env-file bundle_env_var.env \
+       --env-file build-<your-environment>.env \
+       -v /var/run/docker.sock:/var/run/docker.sock \
+       -v "$PWD":/usr/src/app \
+       -w /usr/src/app ruby:2.1  \
+       rspec
+  ```
+
+## TO DO:
+* Create environments stagging, dev, prod
+* Test with [terrafom_validate](https://github.com/elmundio87/terraform_validate)
+* Unit test of python code ```./function/main.py```
 
 Et Voilá!
