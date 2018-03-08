@@ -3,6 +3,7 @@
 # ----------------------------------------
 
 aws-region       = "us-east-1"
+#profile-name     = "bvc"
 profile-name     = "default"
 object-name      = "terraform.tfstate"
 application-name = "lambda_s3_triggered"

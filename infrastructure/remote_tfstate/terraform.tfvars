@@ -5,4 +5,4 @@
 tf_region      = "us-east-1"
 profile        = "default"
 
-tfstate_bucket = "tfstate_lambda"
+tfstate_bucket = "tfstate_lambda_clarivate"
