@@ -5,7 +5,7 @@
 
 variable "tf_region"                    { default = "us-east-1" }
 #variable "profile"                      { default = "bvc" }
-variable "profile"                      { default = "default" }
+variable "profile"                      { }
 
 variable "application-name"             { }
 variable "env"                          { }

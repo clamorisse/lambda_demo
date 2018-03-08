@@ -15,7 +15,7 @@ dependencies:
     - docker info
     - ./terraform --version
     - cd infrastructure && pwd && bundler install
-    - cd infrastructure/terraform && ../../terraform init
+    - cd infrastructure/terraform && ../../terraform init -var 'profile=default'
 
 test:
   post:
