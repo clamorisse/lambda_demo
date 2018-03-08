@@ -38,7 +38,7 @@ The AWS resources required to have this function are provisioned using terraform
 ## How to test it?
 
 * ```cd ./infrastructure/terrafrom```
-* Run ```Terraform init```
+* Run ```terraform init```
 * Run Terraform linter:
 ```
 docker run --rm -v "$PWD":/data -t wata727/tflint
