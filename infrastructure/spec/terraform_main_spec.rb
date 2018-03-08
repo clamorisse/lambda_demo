@@ -17,5 +17,4 @@ end
 
 describe lambda('lambda_s3_triggered-function') do
   it { should exist }
-  its (:role) { is_expected.to eq('lambda_s3_triggered-lambda-exec_role') }
 end
