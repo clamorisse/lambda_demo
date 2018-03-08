@@ -13,11 +13,11 @@ end
 describe s3_bucket('source_bvc_files') do
   it { should exist }
   it { should have_object('data/CA4PExc1500.csv') }
-  it { should have_object('data/CA4PExc1500.txt') }
+  it { should have_object('data/CA4PExc1500.dat') }
 end
 
 describe s3_bucket('source_bvc_filesanalyzed') do
   it { should exist }
   it { should have_object('data/CA4PExc1500.csv') }
-  it { should_not have_object('data/CA4PExc1500.txt') }
+  it { should_not have_object('data/CA4PExc1500.dat') }
 end
