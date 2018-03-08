@@ -40,7 +40,9 @@ The AWS resources required to have this function are provisioned using terraform
 * ```cd ./infrastructure/terrafrom```
 * Run ```terraform plan -out .terraform/.terraform.plan``` and ```terraform apply .terraform/.terrafrom.plan```
 * ```cd ../```
-* Install Gems:
+
+* Install Gems
+
 ```
 docker run --rm -it \
        --net host  \
@@ -51,7 +53,9 @@ docker run --rm -it \
        -w /usr/src/app ruby:2.1  \
        bundler install
  ```
- * Create a file with aws credentials to be run from local environment
+
+ * Create a file with aws credentials to be run from local computer
+
  ```
  ./update_credentials.sh <your-environment> <your-profile-name>
  ```
@@ -67,6 +71,7 @@ docker run --rm -it \
        -w /usr/src/app ruby:2.1  \
        rspec
   ```
+
 ## TO DO:
 * Test with [terrafom_validate](https://github.com/elmundio87/terraform_validate)
 * Unit test of python code ```./function/main.py```
