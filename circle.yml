@@ -23,7 +23,7 @@ test:
     - docker run --rm -v ~/lambda_demo/insfrastructure/terraform/:/data -t wata727/tflint
     - cd function && ls && if [ -e CA4PExc1500.csv ]; then echo true; fi
     - cd infrastructure && export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default) && export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default) && rspec
-    - cd infrastructure/terraform && ../../terraform plan -detailed-exitcode
+    - cd infrastructure/terraform && if [ (../../terraform plan -detailed-exitcode) == 2 ]; then echo true; fi
     
 deployment:
   production:
