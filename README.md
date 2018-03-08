@@ -68,6 +68,7 @@ docker run --rm -it \
        rspec
   ```
 ## TO DO:
+* Create environments stagging, dev, prod
 * Test with [terrafom_validate](https://github.com/elmundio87/terraform_validate)
 * Unit test of python code ```./function/main.py```
 
