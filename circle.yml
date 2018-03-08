@@ -20,8 +20,8 @@ dependencies:
 test:
   post:
     - docker run --rm -v ~/lambda_demo/insfrastructure/terraform/:/data -t wata727/tflint
-    - cd function && ls && if [ -e CA4PExc1500.csv ]; then echo true; fi
-    - cd function && ls && if [ -e CA4PExc1500.dat ]; then echo true; fi
+    - cd function && ls && if [ ! -e CA4PExc1500.csv ]; then exit 1; fi
+    - cd function && ls && if [ ! -e CA4PExc1500.dat ]; then exit 1; fi
     - cd infrastructure/terraform && ../../terraform plan -out .terraform/.terraform.plan
     - cd infrastructure/terraform && ../../terraform apply .terraform/.terraform.plan
     - aws s3 ls
