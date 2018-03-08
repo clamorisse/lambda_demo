@@ -1,0 +1,40 @@
+machine:
+  timezone:
+    America/New_York
+  services:
+    - docker
+
+checkout:
+  post:
+
+dependencies:
+  pre:
+    - sudo pip install awscli
+    - wget https://releases.hashicorp.com/terraform/0.11.3/terraform_0.11.3_linux_amd64.zip
+    - unzip terraform_0.11.3_linux_amd64.zip
+    - docker info
+    - ./terraform --version
+    - cd infrastructure && pwd && bundler install
+    - cd infrastructure/terraform && ../../terraform init -var 'profile=default'
+
+test:
+  post:
+    - docker run --rm -v ~/lambda_demo/insfrastructure/terraform/:/data -t wata727/tflint
+    - cd function && ls && if [ ! -e CA4PExc1500.csv ]; then exit 1; fi
+    - cd function && ls && if [ ! -e CA4PExc1500.dat ]; then exit 1; fi
+    - cd infrastructure/terraform && ../../terraform plan -out .terraform/.terraform.plan
+    - cd infrastructure/terraform && ../../terraform apply .terraform/.terraform.plan
+    - aws s3 ls
+    - aws s3 cp ./function/CA4PExc1500.csv s3://source_bvc_files/data/CA4PExc1500.csv
+    - aws s3 cp ./function/CA4PExc1500.dat s3://source_bvc_files/data/CA4PExc1500.dat
+    - aws s3 ls s3://source_bvc_files/data/
+    - aws s3 ls s3://source_bvc_filesanalyzed/data/
+    - cd infrastructure && export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile default) && export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile default) && rspec
+    - sleep 90
+    - cd infrastructure/terraform && ../../terraform destroy -force
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - cd infrastructure/terraform && ../../terraform apply .terraform/.terraform.plan
